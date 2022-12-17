@@ -1,7 +1,10 @@
 from django.contrib import admin
 
-from .models import Flat
+from .models import Flat, Complaint
 
+
+class ComplaintAdmin(admin.ModelAdmin):
+    raw_id_fields = ('flat', 'user')
 
 class FlatAdmin(admin.ModelAdmin):
     search_fields = (
@@ -11,7 +14,7 @@ class FlatAdmin(admin.ModelAdmin):
         'address',
     )
 
-    readonly_fields = ('created_at', )
+    readonly_fields = ('created_at',)
 
     list_display = (
         'address',
@@ -21,7 +24,7 @@ class FlatAdmin(admin.ModelAdmin):
         'town',
     )
 
-    list_editable = ('new_building', )
+    list_editable = ('new_building',)
 
     list_filter = (
         'new_building',
@@ -31,3 +34,4 @@ class FlatAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Flat, FlatAdmin)
+admin.site.register(Complaint, ComplaintAdmin)
