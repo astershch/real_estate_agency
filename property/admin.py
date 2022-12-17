@@ -7,6 +7,8 @@ class ComplaintAdmin(admin.ModelAdmin):
     raw_id_fields = ('flat', 'user')
 
 class FlatAdmin(admin.ModelAdmin):
+    raw_id_fields = ('like',)
+
     search_fields = (
         'description',
         'town',

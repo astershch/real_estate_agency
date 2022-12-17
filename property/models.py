@@ -9,11 +9,6 @@ class Flat(models.Model):
 
     new_building = models.BooleanField(blank=True, null=True)
 
-    created_at = models.DateTimeField(
-        'Когда создано объявление',
-        default=timezone.now,
-        db_index=True)
-
     description = models.TextField('Текст объявления', blank=True)
     price = models.IntegerField('Цена квартиры', db_index=True)
 
@@ -49,6 +44,18 @@ class Flat(models.Model):
         'Год постройки здания',
         null=True,
         blank=True,
+        db_index=True)
+
+    like = models.ManyToManyField(
+        User,
+        verbose_name='Кто лайкнул',
+        null=True,
+        blank=True,
+    )
+
+    created_at = models.DateTimeField(
+        'Когда создано объявление',
+        default=timezone.now,
         db_index=True)
 
     def __str__(self):
