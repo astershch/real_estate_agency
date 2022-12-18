@@ -10,11 +10,9 @@ def fill_owners(apps, schema_editor):
     for flat in Flat.objects.all():
         Owner.objects.get_or_create(
             full_name=flat.owner,
-            phonenumber=flat.owners_phonenumber,
             pure_phone=flat.owner_pure_phone,
             defaults={
                 'full_name': flat.owner,
-                'phonenumber': flat.owners_phonenumber,
                 'pure_phone': flat.owner_pure_phone,
             },
         )
