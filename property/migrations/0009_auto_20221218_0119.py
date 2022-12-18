@@ -7,7 +7,7 @@ import phonenumbers
 def normalize_phonenumbers(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
 
-    for flat in Flat.objects.all():
+    for flat in Flat.objects.all().iterator():
         if flat.owner_pure_phone:
             continue
 
@@ -25,7 +25,7 @@ def normalize_phonenumbers(apps, schema_editor):
 def move_backward(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
 
-    for flat in Flat.objects.all():
+    for flat in Flat.objects.all().iterator():
         flat.owner_pure_phone = None
         flat.save()
 

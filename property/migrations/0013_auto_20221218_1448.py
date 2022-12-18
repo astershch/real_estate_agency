@@ -7,7 +7,7 @@ def link_owner_to_flats(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
     Owner = apps.get_model('property', 'Owner')
 
-    for flat in Flat.objects.all():
+    for flat in Flat.objects.all().iterator():
         owner, created = Owner.objects.get_or_create(
             full_name=flat.owner,
             pure_phone=flat.owner_pure_phone,
@@ -16,7 +16,7 @@ def link_owner_to_flats(apps, schema_editor):
         if created:
             continue
 
-        if flat in owner.flats.all():
+        if flat in owner.flats.all().iterator():
             continue
 
         owner.flats.add(flat)
@@ -25,7 +25,7 @@ def link_owner_to_flats(apps, schema_editor):
 def move_backward(apps, schema_editor):
     Owner = apps.get_model('property', 'Owner')
 
-    for owner in Owner.objects.all():
+    for owner in Owner.objects.all().iterator():
         owner.flats.clear()
 
 

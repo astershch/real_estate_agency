@@ -6,16 +6,16 @@ from django.db import migrations
 def fill_new_building(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
 
-    for flat in Flat.objects.all():
-        if flat.new_building:
-            continue
+    Flat.objects\
+        .exclude(new_building__isnull=False)\
+        .filter(construction_year__gte=2015)\
+        .update(new_building=True)
 
-        if flat.construction_year >= 2015:
-            flat.new_building = True
-            flat.save()
-        else:
-            flat.new_building = False
-            flat.save()
+    Flat.objects \
+        .exclude(new_building__isnull=False) \
+        .filter(construction_year__lt=2015) \
+        .update(new_building=False)
+
 
 class Migration(migrations.Migration):
     dependencies = [
