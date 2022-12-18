@@ -6,6 +6,12 @@ from .models import Flat, Complaint, Owner
 class OwnerAdmin(admin.ModelAdmin):
     raw_id_fields = ('flats',)
 
+    list_display = (
+        'full_name',
+        'phonenumber',
+        'pure_phone',
+    )
+
 
 class ComplaintAdmin(admin.ModelAdmin):
     raw_id_fields = ('flat', 'user')
