@@ -48,7 +48,7 @@ class Flat(models.Model):
         User,
         verbose_name='Кто лайкнул',
         blank=True,
-        related_name='flats',
+        related_name='likes',
     )
 
     created_at = models.DateTimeField(
